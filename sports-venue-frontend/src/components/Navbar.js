@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Navbar.css'; // Adjust path based on your file structure
 
 export default function Navbar() {
   const user = JSON.parse(sessionStorage.getItem('user'));
@@ -11,21 +12,21 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-100 p-4 shadow flex justify-between">
-      <div>
-        <Link className="mr-4 font-semibold" to="/">Home</Link>
-        <Link className="mr-4" to="/venues">Venues</Link>
-        {user && <Link className="mr-4" to="/bookings">My Bookings</Link>}
+    <nav className="navbar">
+      <div className="navbar-left">
+        <Link to="/">Home</Link>
+        <Link to="/venues">Venues</Link>
+        {user && <Link to="/bookings">My Bookings</Link>}
       </div>
-      <div>
+      <div className="navbar-right">
         {user ? (
           <>
-            <span className="mr-2">Welcome, {user.username}</span>
-            <button onClick={logout} className="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
+            <span>Welcome, {user.username}</span>
+            <button onClick={logout} className="logout-btn">Logout</button>
           </>
         ) : (
           <>
-            <Link className="mr-2" to="/login">Login</Link>
+            <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
           </>
         )}
